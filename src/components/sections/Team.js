@@ -10,21 +10,7 @@ const Team = () => {
       name: "Anmol Gupta",
       role: "CEO & Founder",
       bio: "Visionary leader driving innovation in process mining and intelligent automation, transforming enterprise operations through data-driven insights.",
-      icon: (
-        <svg
-          className="w-12 h-12"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={1.5}
-            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-          />
-        </svg>
-      ),
+      image: "/Anmol.png",
       linkedin: "https://www.linkedin.com/in/anmol-gupta",
       color: "from-primary-500 to-orange-600",
     },
@@ -32,21 +18,7 @@ const Team = () => {
       name: "Gaurav Pothula",
       role: "Partner & Country Head India",
       bio: "Strategic partner leading operations in India, bringing deep expertise in process intelligence and enterprise transformation across diverse industries.",
-      icon: (
-        <svg
-          className="w-12 h-12"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={1.5}
-            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-          />
-        </svg>
-      ),
+      image: "/Gaurav.png",
       linkedin: "https://www.linkedin.com/in/gaurav-pothula",
       color: "from-blue-500 to-indigo-600",
     },
@@ -113,7 +85,7 @@ const Team = () => {
                         viewport={{ once: true }}
                         transition={{ delay: index * 0.2, duration: 0.5 }}
                         whileHover={{ scale: 1.05, rotate: 3 }}
-                        className="relative w-32 h-32 mx-auto"
+                        className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 mx-auto"
                       >
                         {/* Rotating border ring */}
                         <motion.div
@@ -136,9 +108,17 @@ const Team = () => {
                               className={`absolute inset-0 bg-gradient-to-br ${member.color} opacity-20`}
                             ></div>
 
-                            {/* Silhouette icon */}
-                            <div className="relative text-gray-400 group-hover:text-white transition-colors duration-300 scale-150">
-                              {member.icon}
+                            {/* Profile Image */}
+                            <div className="relative w-full h-full overflow-hidden">
+                              <img
+                                src={member.image}
+                                alt={member.name}
+                                className={`${
+                                  member.name === "Anmol Gupta" 
+                                    ? "w-[230%] h-[230%]" 
+                                    : "w-[260%] h-[260%]"
+                                } object-cover rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}
+                              />
                             </div>
 
                             {/* Shine effect */}
