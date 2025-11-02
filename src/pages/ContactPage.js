@@ -47,7 +47,7 @@ const ContactPage = () => {
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 text-center">
               Our <span className="gradient-text">Locations</span>
             </h2>
-            <div className="w-full h-[500px] rounded-xl overflow-hidden bg-gray-800/50 border border-gray-700/50">
+            <div className="w-full h-[300px] sm:h-[400px] lg:h-[500px] rounded-xl overflow-hidden bg-gray-800/50 border border-gray-700/50">
               <Suspense
                 fallback={
                   <div className="w-full h-full flex items-center justify-center">
