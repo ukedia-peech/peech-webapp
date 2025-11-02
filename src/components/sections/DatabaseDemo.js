@@ -54,7 +54,7 @@ const CelonisShowcase = () => {
                 transition: { duration: 0.8, delay: 0.4 },
               },
             }}
-            className="flex justify-center order-2 lg:order-1"
+            className="flex justify-center order-1 lg:order-1"
           >
             <ProcessMiningVisualization
               className="mx-auto"
@@ -79,7 +79,7 @@ const CelonisShowcase = () => {
                 transition: { duration: 0.8, delay: 0.6 },
               },
             }}
-            className="space-y-8 order-1 lg:order-2"
+            className="space-y-8 order-2 lg:order-2"
           >
             <div className="space-y-6">
               <div className="flex items-start space-x-3 sm:space-x-4">

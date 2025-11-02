@@ -177,9 +177,9 @@ const Features = () => {
                 className="group relative"
               >
                 <div className="relative bg-black-900/80 backdrop-blur-sm rounded-3xl p-8 border border-gray-800 hover:border-primary-500/50 transition-all duration-500 overflow-hidden h-full">
-                  <div className="grid grid-cols-1 lg:grid-cols-[1fr_200px] gap-6 items-center">
+                  <div className="grid grid-cols-1 lg:grid-cols-[1fr_200px] gap-6 items-center min-h-0">
                     {/* Left Content */}
-                    <div className="relative z-10">
+                    <div className="relative z-10 min-h-0">
                       {/* Title with Icon */}
                       <div className="flex items-start gap-4 mb-6">
                         <div
@@ -201,7 +201,7 @@ const Features = () => {
                     </div>
 
                     {/* Right Visual - Animated Abstract Design */}
-                    <div className="relative h-48 lg:h-full min-h-[180px] rounded-2xl overflow-hidden">
+                    <div className="relative h-48 lg:h-full min-h-[180px] rounded-2xl overflow-hidden flex-shrink-0">
                       {/* Animated background */}
                       <div className="absolute inset-0 bg-gradient-to-br from-black-800 to-black-900">
                         {/* Grid pattern */}
