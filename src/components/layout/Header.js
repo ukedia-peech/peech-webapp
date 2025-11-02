@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
+import { getPublicAssetPath } from "../../utils/utils";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,7 +51,7 @@ const Header = () => {
               <div className="relative">
                 <div className="absolute inset-0 bg-primary-500/20 blur-lg rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <img
-                  src="/peech-logo-removebg-preview.png"
+                  src={getPublicAssetPath("peech-logo-removebg-preview.png")}
                   alt="Peech"
                   className="relative w-8 h-8 object-contain"
                   onError={(e) => {

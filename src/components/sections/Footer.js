@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { getPublicAssetPath } from "../../utils/utils";
 
 const Footer = () => {
   return (
@@ -29,7 +30,7 @@ const Footer = () => {
             {/* Peech Logo */}
             <div>
               <img
-                src="/peech-txt.png"
+                src={getPublicAssetPath("peech-txt.png")}
                 alt="Peech"
                 className="h-10 sm:h-12 w-auto object-contain"
                 onError={(e) => {
@@ -142,7 +143,7 @@ const Footer = () => {
                 </div>
 
                 <img
-                  src="/Celonis-Gold.png"
+                  src={getPublicAssetPath("Celonis-Gold.png")}
                   alt="Celonis Gold Partner"
                   className="h-32 sm:h-40 md:h-48 lg:h-56 xl:h-64 w-auto object-contain mx-auto filter drop-shadow-2xl"
                   onError={(e) => {
