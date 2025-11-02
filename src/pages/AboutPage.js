@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Team from "../components/sections/Team";
-import FlowHero from "../components/sections/FlowHero";
 
 const AboutPage = () => {
   return (
@@ -13,7 +12,6 @@ const AboutPage = () => {
       className="pt-20"
     >
       <Team />
-      <FlowHero />
     </motion.div>
   );
 };

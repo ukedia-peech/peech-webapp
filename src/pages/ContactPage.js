@@ -61,7 +61,7 @@ const ContactPage = () => {
                       start: {
                         lat: 40.7128,
                         lng: -74.006,
-                        label: "Brooklyn, NY",
+                        label: "NYC, NY",
                       },
                       end: {
                         lat: 17.385,
@@ -197,27 +197,6 @@ const ContactPage = () => {
                     </div>
                   </div>
                 </div>
-
-                {/* Business Hours */}
-                <Card variant="dark" className="p-6 h-fit">
-                  <h3 className="text-lg font-semibold text-white mb-4">
-                    Business Hours
-                  </h3>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">Mon - Fri</span>
-                      <span className="text-white">9AM - 6PM EST</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">Saturday</span>
-                      <span className="text-white">10AM - 2PM EST</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">Sunday</span>
-                      <span className="text-gray-500">Closed</span>
-                    </div>
-                  </div>
-                </Card>
               </div>
             </div>
 

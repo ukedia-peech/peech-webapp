@@ -74,7 +74,7 @@ const Hero = () => {
             <SplitText
               text="Transform Your Business"
               as="h1"
-              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight whitespace-nowrap"
               staggerDelay={0.05}
             />
             <div className="mt-2">
@@ -181,10 +181,12 @@ const Hero = () => {
               transition={{ ease: customEasing.smooth }}
             >
               <GradientText className="text-3xl md:text-4xl font-bold mb-2">
-                $2M
+                5x
               </GradientText>
               <div className="text-gray-400 text-sm sm:text-base">
-                Avg. value framed in 4 weeks per process
+                Average ROI achieved
+                <br className="hidden sm:hidden" />
+                {" "}per process
               </div>
             </motion.div>
             <motion.div

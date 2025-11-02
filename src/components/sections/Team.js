@@ -8,10 +8,10 @@ const Team = () => {
   const teamMembers = [
     {
       name: "Anmol Gupta",
-      role: "CEO & Founder",
+      role: "Founder & CEO",
       bio: "Visionary leader driving innovation in process mining and intelligent automation, transforming enterprise operations through data-driven insights.",
       image: "/Anmol.png",
-      linkedin: "https://www.linkedin.com/in/anmol-gupta",
+      linkedin: "https://www.linkedin.com/in/anmol-gupta-115530a4/",
       color: "from-primary-500 to-orange-600",
     },
     {

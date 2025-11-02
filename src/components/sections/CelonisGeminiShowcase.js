@@ -95,11 +95,6 @@ const CelonisGeminiShowcase = () => {
             >
               <div className="bg-gradient-to-br from-black-900/80 to-black-800/60 backdrop-blur-lg rounded-2xl p-6 sm:p-8 border border-primary-500/20 shadow-2xl">
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white font-bold text-xl sm:text-2xl">
-                      AG
-                    </div>
-                  </div>
                   <div className="flex-1">
                     <p className="text-gray-300 text-sm sm:text-base lg:text-lg italic mb-4 leading-relaxed">
                       "The new solution, co-developed by Celonis and Peech, enables retailers and consumer packaged goods (CPG) companies to reduce product waste and lost revenue by optimising the process of managing perishable inventory."

@@ -14,14 +14,14 @@ export function WorldMap({
   const [hoveredLocation, setHoveredLocation] = useState(null);
 
   const map = useMemo(
-    () => new DottedMap({ height: 100, grid: "diagonal" }),
+    () => new DottedMap({ height: 60, grid: "diagonal" }),
     []
   );
 
   const svgMap = useMemo(
     () =>
       map.getSVG({
-        radius: 0.22,
+        radius: 0.25,
         color: "#FFFFFF40", // Brighter dots for better contrast
         shape: "circle",
         backgroundColor: "transparent",
@@ -46,6 +46,34 @@ export function WorldMap({
   const totalAnimationTime = dots.length * staggerDelay + animationDuration;
   const pauseTime = 2; // Pause for 2 seconds when all paths are drawn
   const fullCycleDuration = totalAnimationTime + pauseTime;
+
+  // Deduplicate points to avoid rendering the same location multiple times
+  const uniquePoints = useMemo(() => {
+    const pointsMap = new Map();
+    
+    dots.forEach((dot) => {
+      const startKey = `${dot.start.lat},${dot.start.lng}`;
+      const endKey = `${dot.end.lat},${dot.end.lng}`;
+      
+      if (!pointsMap.has(startKey)) {
+        pointsMap.set(startKey, {
+          ...dot.start,
+          x: projectPoint(dot.start.lat, dot.start.lng).x,
+          y: projectPoint(dot.start.lat, dot.start.lng).y,
+        });
+      }
+      
+      if (!pointsMap.has(endKey)) {
+        pointsMap.set(endKey, {
+          ...dot.end,
+          x: projectPoint(dot.end.lat, dot.end.lng).x,
+          y: projectPoint(dot.end.lat, dot.end.lng).y,
+        });
+      }
+    });
+    
+    return Array.from(pointsMap.values());
+  }, [dots]);
 
   return (
     <div className="w-full aspect-[2/1] md:aspect-[2.5/1] lg:aspect-[2/1] bg-gradient-to-br from-black-900 to-black-800 rounded-2xl relative font-sans overflow-hidden border border-primary-500/20">
@@ -81,160 +109,76 @@ export function WorldMap({
 
         {/* Animated lines removed as per user request */}
 
-        {dots.map((dot, i) => {
-          const startPoint = projectPoint(dot.start.lat, dot.start.lng);
-          const endPoint = projectPoint(dot.end.lat, dot.end.lng);
+        {/* Render unique points only once */}
+        {uniquePoints.map((point, i) => (
+          <g key={`point-${i}`}>
+            <motion.g
+              onHoverStart={() =>
+                setHoveredLocation(point.label || `Location ${i}`)
+              }
+              onHoverEnd={() => setHoveredLocation(null)}
+              className="cursor-pointer"
+              whileHover={{ scale: 1.2 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
+              <circle
+                cx={point.x}
+                cy={point.y}
+                r="4"
+                fill={lineColor}
+                filter="url(#glow)"
+                className="drop-shadow-lg"
+              />
+              <circle
+                cx={point.x}
+                cy={point.y}
+                r="4"
+                fill={lineColor}
+                opacity="0.5"
+              >
+                <animate
+                  attributeName="r"
+                  from="4"
+                  to="16"
+                  dur="2s"
+                  begin="0s"
+                  repeatCount="indefinite"
+                />
+                <animate
+                  attributeName="opacity"
+                  from="0.6"
+                  to="0"
+                  dur="2s"
+                  begin="0s"
+                  repeatCount="indefinite"
+                />
+              </circle>
+            </motion.g>
 
-          // Adjust label positions to prevent overlap
-          // For start labels: position above the point
-          const startLabelOffsetY = -35;
-
-          // For end labels: since multiple locations connect to same endpoint (Hyderabad),
-          // we only show the label once (on the first occurrence)
-          const isFirstEndpoint = i === 0;
-
-          return (
-            <g key={`points-group-${i}`}>
-              {/* Start Point */}
-              <g key={`start-${i}`}>
-                <motion.g
-                  onHoverStart={() =>
-                    setHoveredLocation(dot.start.label || `Location ${i}`)
-                  }
-                  onHoverEnd={() => setHoveredLocation(null)}
-                  className="cursor-pointer"
-                  whileHover={{ scale: 1.2 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            {showLabels && point.label && (
+              <motion.g
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 * i, duration: 0.5 }}
+                className="pointer-events-none"
+              >
+                <foreignObject
+                  x={point.x - 50}
+                  y={point.y - 35}
+                  width="100"
+                  height="26"
+                  className="block"
                 >
-                  <circle
-                    cx={startPoint.x}
-                    cy={startPoint.y}
-                    r="4"
-                    fill={lineColor}
-                    filter="url(#glow)"
-                    className="drop-shadow-lg"
-                  />
-                  <circle
-                    cx={startPoint.x}
-                    cy={startPoint.y}
-                    r="4"
-                    fill={lineColor}
-                    opacity="0.5"
-                  >
-                    <animate
-                      attributeName="r"
-                      from="4"
-                      to="16"
-                      dur="2s"
-                      begin="0s"
-                      repeatCount="indefinite"
-                    />
-                    <animate
-                      attributeName="opacity"
-                      from="0.6"
-                      to="0"
-                      dur="2s"
-                      begin="0s"
-                      repeatCount="indefinite"
-                    />
-                  </circle>
-                </motion.g>
-
-                {showLabels && dot.start.label && (
-                  <motion.g
-                    initial={{ opacity: 0, y: 5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 * i + 0.3, duration: 0.5 }}
-                    className="pointer-events-none"
-                  >
-                    <foreignObject
-                      x={startPoint.x - 50}
-                      y={startPoint.y + startLabelOffsetY}
-                      width="100"
-                      height="26"
-                      className="block"
-                    >
-                      <div className="flex items-center justify-center h-full">
-                        <span className="text-[10px] sm:text-[11px] font-semibold px-2.5 py-1 rounded-md bg-gray-900/90 text-white backdrop-blur-sm shadow-xl whitespace-nowrap">
-                          {dot.start.label}
-                        </span>
-                      </div>
-                    </foreignObject>
-                  </motion.g>
-                )}
-              </g>
-
-              {/* End Point */}
-              <g key={`end-${i}`}>
-                <motion.g
-                  onHoverStart={() =>
-                    setHoveredLocation(dot.end.label || `Destination ${i}`)
-                  }
-                  onHoverEnd={() => setHoveredLocation(null)}
-                  className="cursor-pointer"
-                  whileHover={{ scale: 1.2 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >
-                  <circle
-                    cx={endPoint.x}
-                    cy={endPoint.y}
-                    r="4"
-                    fill={lineColor}
-                    filter="url(#glow)"
-                    className="drop-shadow-lg"
-                  />
-                  <circle
-                    cx={endPoint.x}
-                    cy={endPoint.y}
-                    r="4"
-                    fill={lineColor}
-                    opacity="0.5"
-                  >
-                    <animate
-                      attributeName="r"
-                      from="4"
-                      to="16"
-                      dur="2s"
-                      begin="0.5s"
-                      repeatCount="indefinite"
-                    />
-                    <animate
-                      attributeName="opacity"
-                      from="0.6"
-                      to="0"
-                      dur="2s"
-                      begin="0.5s"
-                      repeatCount="indefinite"
-                    />
-                  </circle>
-                </motion.g>
-
-                {showLabels && dot.end.label && isFirstEndpoint && (
-                  <motion.g
-                    initial={{ opacity: 0, y: 5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 * i + 0.5, duration: 0.5 }}
-                    className="pointer-events-none"
-                  >
-                    <foreignObject
-                      x={endPoint.x - 50}
-                      y={endPoint.y - 35}
-                      width="100"
-                      height="26"
-                      className="block"
-                    >
-                      <div className="flex items-center justify-center h-full">
-                        <span className="text-[10px] sm:text-[11px] font-semibold px-2.5 py-1 rounded-md bg-gray-900/90 text-white backdrop-blur-sm shadow-xl whitespace-nowrap">
-                          {dot.end.label}
-                        </span>
-                      </div>
-                    </foreignObject>
-                  </motion.g>
-                )}
-              </g>
-            </g>
-          );
-        })}
+                  <div className="flex items-center justify-center h-full">
+                    <span className="text-[10px] sm:text-[11px] font-semibold px-2.5 py-1 rounded-md bg-gray-900/90 text-white backdrop-blur-sm shadow-xl whitespace-nowrap">
+                      {point.label}
+                    </span>
+                  </div>
+                </foreignObject>
+              </motion.g>
+            )}
+          </g>
+        ))}
       </svg>
 
       {/* Mobile Tooltip */}

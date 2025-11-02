@@ -1,9 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { tabVariants } from "../../utils/animations";
 
 const UseCases = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const intervalRef = useRef(null);
+
+  // Auto-slide functionality
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setActiveTab((prevTab) => (prevTab + 1) % useCases.length);
+    }, 6000);
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
+
+  // Reset interval when user manually changes tab
+  const handleTabClick = (index) => {
+    setActiveTab(index);
+    // Clear existing interval
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    // Start new interval
+    intervalRef.current = setInterval(() => {
+      setActiveTab((prevTab) => (prevTab + 1) % useCases.length);
+    }, 6000);
+  };
 
   const useCases = [
     {
@@ -170,7 +197,7 @@ const UseCases = () => {
               key={index}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => setActiveTab(index)}
+              onClick={() => handleTabClick(index)}
               className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium transition-all duration-300 text-sm sm:text-base flex items-center ${
                 activeTab === index
                   ? "bg-primary-500 text-white shadow-lg"

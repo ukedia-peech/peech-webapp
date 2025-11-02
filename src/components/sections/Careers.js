@@ -463,7 +463,7 @@ const Careers = () => {
                         href="mailto:info@peech.tech"
                         className="text-primary-500 hover:text-primary-400 transition-colors text-sm font-medium"
                       >
-                        careers@peech.com
+                        info@peech.tech
                       </a>
                     </div>
                   </div>
