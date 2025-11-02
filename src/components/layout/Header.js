@@ -206,11 +206,7 @@ const Header = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className={`lg:hidden fixed inset-0 top-16 backdrop-blur-2xl ${
-              scrolled
-                ? "bg-black-950/95 backdrop-blur-3xl"
-                : "bg-black-950/98 backdrop-blur-2xl"
-            }`}
+            className="lg:hidden fixed inset-0 top-16 bg-black-950"
             onClick={() => setIsOpen(false)}
           >
             <motion.div
