@@ -84,15 +84,6 @@ const LoadingScreen = ({ onComplete, duration = 3000 }) => {
               Process Mining Consulting
             </motion.p>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.0, duration: 0.8 }}
-              className="text-primary-500 text-sm mb-8 font-mono"
-            >
-              // Transforming business processes with Celonis
-            </motion.p>
-
             {/* Progress Bar */}
             <motion.div
               initial={{ opacity: 0, scaleX: 0 }}
