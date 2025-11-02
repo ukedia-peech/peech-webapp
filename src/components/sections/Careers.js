@@ -211,14 +211,16 @@ const Careers = () => {
         </motion.div>
 
         {/* Job Listings */}
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-12 sm:mb-16 px-4"
-        >
-          {filteredJobs.map((job, index) => (
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={selectedDepartment}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-12 sm:mb-16 px-4"
+          >
+            {filteredJobs.map((job, index) => (
             <motion.div
               key={job.id}
               variants={cardVariants}
@@ -273,7 +275,8 @@ const Careers = () => {
               </Card>
             </motion.div>
           ))}
-        </motion.div>
+          </motion.div>
+        </AnimatePresence>
       </div>
 
       {/* Job Detail Modal */}

@@ -25,7 +25,7 @@ const Features = () => {
       title: "Celonis Process Mining",
       description:
         "Discover actual business processes from system data, identify bottlenecks, and uncover hidden inefficiencies with industry-leading process mining technology.",
-      color: "from-primary-500 to-primary-600",
+      color: "from-blue-500 via-blue-600 to-indigo-600",
     },
     {
       icon: (
@@ -46,7 +46,7 @@ const Features = () => {
       title: "Process Optimization",
       description:
         "Data-driven recommendations for process improvements with measurable ROI and performance metrics that drive operational excellence.",
-      color: "from-purple-500 to-purple-600",
+      color: "from-violet-500 via-purple-500 to-fuchsia-600",
     },
     {
       icon: (
@@ -67,7 +67,7 @@ const Features = () => {
       title: "End-to-End Transformation",
       description:
         "Complete business transformation from process discovery to automation implementation and value realization with proven methodologies.",
-      color: "from-orange-500 to-orange-600",
+      color: "from-emerald-500 via-teal-500 to-cyan-600",
     },
     {
       icon: (
@@ -88,7 +88,7 @@ const Features = () => {
       title: "AI-Powered Process Excellence",
       description:
         "Intelligent automation and predictive analytics powered by AI to optimize workflows, identify opportunities, and drive continuous improvement at scale.",
-      color: "from-indigo-500 to-indigo-600",
+      color: "from-amber-500 via-orange-500 to-red-600",
     },
     {
       icon: (
@@ -109,7 +109,7 @@ const Features = () => {
       title: "Task Mining Solutions",
       description:
         "Analyze user interactions and desktop activities to identify automation opportunities and process improvements through advanced task mining.",
-      color: "from-green-500 to-green-600",
+      color: "from-rose-500 via-pink-500 to-fuchsia-600",
     },
     {
       icon: (
@@ -130,7 +130,7 @@ const Features = () => {
       title: "RPA Automation",
       description:
         "Implement intelligent robotic process automation to streamline repetitive tasks and accelerate digital transformation with proven RPA frameworks.",
-      color: "from-cyan-500 to-cyan-600",
+      color: "from-sky-500 via-blue-500 to-indigo-600",
     },
   ];
 
@@ -181,13 +181,15 @@ const Features = () => {
                     {/* Left Content */}
                     <div className="relative z-10">
                       {/* Title with Icon */}
-                      <div className="flex items-center gap-4 mb-4">
+                      <div className="flex items-start gap-4 mb-6">
                         <div
-                          className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg`}
+                          className={`w-14 h-14 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg flex-shrink-0 mt-1`}
                         >
-                          {feature.icon}
+                          <div className="w-8 h-8">
+                            {feature.icon}
+                          </div>
                         </div>
-                        <h3 className="text-2xl font-bold text-white group-hover:text-primary-400 transition-colors duration-300">
+                        <h3 className="text-2xl font-bold text-white group-hover:text-primary-400 transition-colors duration-300 leading-tight">
                           {feature.title}
                         </h3>
                       </div>
@@ -212,44 +214,44 @@ const Features = () => {
                           }}
                         />
 
-                        {/* Floating animated shapes */}
+                        {/* Floating animated shapes - standardized sizes */}
                         <motion.div
                           animate={{
-                            y: [0, -15, 0],
-                            rotate: [0, 10, 0],
+                            y: [0, -12, 0],
+                            rotate: [0, 8, 0],
                           }}
                           transition={{
-                            duration: 3 + index * 0.5,
+                            duration: 3,
                             repeat: Infinity,
                             ease: "easeInOut",
                           }}
-                          className={`absolute top-6 right-6 w-16 h-16 rounded-xl bg-gradient-to-br ${feature.color} opacity-40 blur-sm`}
+                          className={`absolute top-6 right-6 w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} opacity-40 blur-sm`}
                         />
                         <motion.div
                           animate={{
-                            y: [0, 20, 0],
+                            y: [0, 12, 0],
                             rotate: [0, -8, 0],
-                            scale: [1, 1.1, 1],
+                            scale: [1, 1.05, 1],
                           }}
                           transition={{
-                            duration: 4 + index * 0.3,
+                            duration: 4,
                             repeat: Infinity,
                             ease: "easeInOut",
                             delay: 0.5,
                           }}
-                          className={`absolute bottom-6 left-6 w-24 h-24 rounded-full bg-gradient-to-br ${feature.color} opacity-30 blur-md`}
+                          className={`absolute bottom-6 left-6 w-16 h-16 rounded-full bg-gradient-to-br ${feature.color} opacity-30 blur-md`}
                         />
                         <motion.div
                           animate={{
-                            scale: [1, 1.15, 1],
-                            rotate: [0, 15, 0],
+                            scale: [1, 1.1, 1],
+                            rotate: [0, 10, 0],
                           }}
                           transition={{
-                            duration: 5 + index * 0.4,
+                            duration: 5,
                             repeat: Infinity,
                             ease: "easeInOut",
                           }}
-                          className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-2xl bg-gradient-to-br ${feature.color} opacity-20`}
+                          className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-2xl bg-gradient-to-br ${feature.color} opacity-20`}
                         />
                       </div>
 

@@ -179,47 +179,6 @@ const ProcessMiningVisualization = ({
         />
       </div>
 
-      {/* Process Metrics Display */}
-      <div className="mt-8 space-y-3">
-        <div className="bg-gray-900/50 backdrop-blur-sm rounded-lg p-3 border border-gray-700">
-          <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-300">{metrics.first}</span>
-            <div className="flex items-center space-x-2">
-              <div className="w-12 bg-gray-700 rounded-full h-2">
-                <motion.div
-                  className="h-2 rounded-full"
-                  style={{ backgroundColor: accentColor }}
-                  animate={{ width: ['40%', '85%', '40%'] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                />
-              </div>
-              <span className="text-sm font-semibold" style={{ color: accentColor }}>
-                85%
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-gray-900/50 backdrop-blur-sm rounded-lg p-3 border border-gray-700">
-          <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-300">{metrics.second}</span>
-            <div className="flex items-center space-x-2">
-              <div className="w-12 bg-gray-700 rounded-full h-2">
-                <motion.div
-                  className="h-2 rounded-full"
-                  style={{ backgroundColor: '#10B981' }}
-                  animate={{ width: ['60%', '92%', '60%'] }}
-                  transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
-                />
-              </div>
-              <span className="text-sm font-semibold text-green-400">
-                92%
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Title */}
       <div className="text-center mt-4">
         <h3 className="text-sm font-medium text-gray-300">{title}</h3>

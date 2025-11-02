@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import CelonisShowcase from "../components/sections/DatabaseDemo";
 import UseCases from "../components/sections/UseCases";
-import HowItWorks from "../components/sections/HowItWorks";
 
 const SolutionsPage = () => {
   return (
@@ -15,7 +14,6 @@ const SolutionsPage = () => {
     >
       <CelonisShowcase />
       <UseCases />
-      <HowItWorks />
     </motion.div>
   );
 };

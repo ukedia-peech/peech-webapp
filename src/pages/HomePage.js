@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Hero from "../components/sections/Hero";
-import OurVision from "../components/sections/OurVision";
 import Features from "../components/sections/Features";
 import CustomerLogos from "../components/sections/CustomerLogos";
 
@@ -14,7 +13,6 @@ const HomePage = () => {
       transition={{ duration: 0.5 }}
     >
       <Hero />
-      <OurVision />
       <Features />
       <CustomerLogos />
     </motion.div>

@@ -22,12 +22,19 @@ const CelonisGeminiShowcase = () => {
               transition={{ duration: 0.6 }}
               className="mb-8"
             >
-              <span className="inline-block px-4 py-2 bg-primary-500/20 rounded-full text-primary-400 text-xs sm:text-sm font-bold mb-4 backdrop-blur-sm border border-primary-500/30">
-                🚀 FEATURED PARTNERSHIP
-              </span>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4">
-                Celonis <span className="text-primary-500">X</span> Peech
-              </h2>
+              <a 
+                href="https://www.celonis.com/news/press/celonis-and-peech-launch-inventory-lifecycle-solution-to-optimize-retail-cpg-operations-and-reduce-perishable-goods-losses"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-block"
+              >
+                <span className="inline-block px-4 py-2 bg-primary-500/20 rounded-full text-primary-400 text-xs sm:text-sm font-bold mb-4 backdrop-blur-sm border border-primary-500/30 group-hover:bg-primary-500/30 transition-colors">
+                  🚀 FEATURED PARTNERSHIP
+                </span>
+                <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 group-hover:text-primary-400 transition-colors">
+                  Celonis <span className="text-primary-500">X</span> Peech
+                </h2>
+              </a>
               <p className="text-xl sm:text-2xl lg:text-3xl font-light bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-400">
                 Inventory Lifecycle Optimization
               </p>
@@ -95,14 +102,14 @@ const CelonisGeminiShowcase = () => {
                   </div>
                   <div className="flex-1">
                     <p className="text-gray-300 text-sm sm:text-base lg:text-lg italic mb-4 leading-relaxed">
-                      "By bringing Celonis Process Intelligence to the inventory lifecycle process, we were able to create a solution that lets retailers and CPG companies answer the question, 'Did we do everything possible to sell the inventory before it goes bad?' whether it's a loaf of bread on the grocery store shelf or cosmetics waiting for delivery in the warehouse."
+                      "The new solution, co-developed by Celonis and Peech, enables retailers and consumer packaged goods (CPG) companies to reduce product waste and lost revenue by optimising the process of managing perishable inventory."
                     </p>
                     <div className="flex flex-col">
                       <span className="text-white font-semibold text-base sm:text-lg">
-                        Anmol Gupta
+                        Celonis Official Press
                       </span>
                       <span className="text-gray-400 text-xs sm:text-sm">
-                        Founder and CEO, Peech
+                        Press Release
                       </span>
                     </div>
                   </div>

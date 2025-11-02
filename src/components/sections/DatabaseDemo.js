@@ -20,11 +20,11 @@ const CelonisShowcase = () => {
           <motion.h2
             className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold gradient-text mb-4 sm:mb-6 px-4 pb-2"
             variants={{
-              hidden: { opacity: 0, y: 30 },
+              hiddens: { opacity: 0, y: 30 },
               visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
             }}
           >
-            End-to-End Process Mining Excellence
+            End-to-End Process Transformation
           </motion.h2>
           <motion.p
             className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto px-4"
@@ -58,18 +58,13 @@ const CelonisShowcase = () => {
           >
             <ProcessMiningVisualization
               className="mx-auto"
-              title="Process Mining & Automation"
               centerText="PEECH"
               accentColor="#f97316"
               processSteps={{
-                first: "Discover",
-                second: "Analyze",
-                third: "Optimize",
-                fourth: "Automate",
-              }}
-              metrics={{
-                first: "ROI Achievement",
-                second: "Process Excellence",
+                first: "Find",
+                second: "Frame",
+                third: "Fix",
+                fourth: "Flow",
               }}
             />
           </motion.div>
@@ -106,10 +101,10 @@ const CelonisShowcase = () => {
                 </div>
                 <div>
                   <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">
-                    Discover
+                    Find
                   </h3>
                   <p className="text-gray-400 text-sm sm:text-base">
-                    Map your actual business processes from system event logs and uncover hidden inefficiencies
+                    Find issues and inefficiencies via advanced process mining technology
                   </p>
                 </div>
               </div>
@@ -127,16 +122,16 @@ const CelonisShowcase = () => {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={2}
-                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622"
                     />
                   </svg>
                 </div>
                 <div>
                   <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">
-                    Analyze
+                    Frame
                   </h3>
                   <p className="text-gray-400 text-sm sm:text-base">
-                    Deep-dive into performance metrics and understand root causes of process inefficiencies
+                    Expert consulting to frame and structure process challenges effectively
                   </p>
                 </div>
               </div>
@@ -160,10 +155,10 @@ const CelonisShowcase = () => {
                 </div>
                 <div>
                   <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">
-                    Optimize
+                    Fix
                   </h3>
                   <p className="text-gray-400 text-sm sm:text-base">
-                    Implement data-driven improvements and redesign processes for maximum efficiency
+                    Implement AI and intelligent automation solutions to resolve inefficiencies
                   </p>
                 </div>
               </div>
@@ -181,16 +176,16 @@ const CelonisShowcase = () => {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={2}
-                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                      d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
                     />
                   </svg>
                 </div>
                 <div>
                   <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">
-                    Automate
+                    Flow
                   </h3>
                   <p className="text-gray-400 text-sm sm:text-base">
-                    Deploy intelligent automation and achieve measurable business value at scale
+                    Drive continuous transformation through sustainable optimization and daily improvements
                   </p>
                 </div>
               </div>
