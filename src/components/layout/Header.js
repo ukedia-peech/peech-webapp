@@ -217,9 +217,30 @@ const Header = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ delay: 0.1, duration: 0.4 }}
-              className="container-custom px-4 sm:px-6 pt-24 pb-8"
+              className="container-custom px-4 sm:px-6 pt-24 pb-8 relative"
               onClick={(e) => e.stopPropagation()}
             >
+              {/* Close Button - Top Right */}
+              <motion.button
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setIsOpen(false)}
+                className="absolute top-6 right-4 w-10 h-10 flex items-center justify-center rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+                aria-label="Close menu"
+              >
+                <svg
+                  className="w-6 h-6 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </motion.button>
               <nav className="flex flex-col space-y-2">
                 {navItems.map((item, index) => {
                   const isActive = location.pathname === item.href;
