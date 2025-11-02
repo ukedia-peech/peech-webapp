@@ -53,33 +53,33 @@ const CelonisGeminiShowcase = () => {
 
             {/* Metrics */}
             <motion.div
-              className="grid grid-cols-3 gap-4 sm:gap-6 max-w-3xl mx-auto mb-10"
+              className="grid grid-cols-3 gap-3 sm:gap-6 max-w-3xl mx-auto mb-10"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <div className="bg-black-900/70 backdrop-blur-md rounded-xl p-4 sm:p-6 border border-primary-500/30">
-                <div className="text-3xl sm:text-4xl lg:text-5xl font-bold gradient-text mb-2">
+              <div className="bg-black-900/70 backdrop-blur-md rounded-xl p-3 sm:p-6 border border-primary-500/30 min-h-0">
+                <div className="text-2xl sm:text-4xl lg:text-5xl font-bold gradient-text mb-1 sm:mb-2 leading-tight">
                   $35M
                 </div>
-                <div className="text-gray-400 text-xs sm:text-sm">
+                <div className="text-gray-400 text-xs sm:text-sm leading-tight">
                   Revenue Recaptured
                 </div>
               </div>
-              <div className="bg-black-900/70 backdrop-blur-md rounded-xl p-4 sm:p-6 border border-primary-500/30">
-                <div className="text-3xl sm:text-4xl lg:text-5xl font-bold gradient-text mb-2">
+              <div className="bg-black-900/70 backdrop-blur-md rounded-xl p-3 sm:p-6 border border-primary-500/30 min-h-0">
+                <div className="text-2xl sm:text-4xl lg:text-5xl font-bold gradient-text mb-1 sm:mb-2 leading-tight">
                   2%
                 </div>
-                <div className="text-gray-400 text-xs sm:text-sm">
+                <div className="text-gray-400 text-xs sm:text-sm leading-tight">
                   Sell-Through ↑
                 </div>
               </div>
-              <div className="bg-black-900/70 backdrop-blur-md rounded-xl p-4 sm:p-6 border border-primary-500/30">
-                <div className="text-3xl sm:text-4xl lg:text-5xl font-bold gradient-text mb-2">
+              <div className="bg-black-900/70 backdrop-blur-md rounded-xl p-3 sm:p-6 border border-primary-500/30 min-h-0">
+                <div className="text-2xl sm:text-4xl lg:text-5xl font-bold gradient-text mb-1 sm:mb-2 leading-tight">
                   4K+
                 </div>
-                <div className="text-gray-400 text-xs sm:text-sm">
+                <div className="text-gray-400 text-xs sm:text-sm leading-tight">
                   Stores Scaled
                 </div>
               </div>
