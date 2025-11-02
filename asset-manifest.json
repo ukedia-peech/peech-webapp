@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/peech-webapp/static/css/main.db32b7e6.css",
-    "main.js": "/peech-webapp/static/js/main.8493175e.js",
+    "main.js": "/peech-webapp/static/js/main.285d9d74.js",
     "static/js/896.4f7ccddc.chunk.js": "/peech-webapp/static/js/896.4f7ccddc.chunk.js",
     "static/js/501.9d3962bd.chunk.js": "/peech-webapp/static/js/501.9d3962bd.chunk.js",
     "static/js/935.96dddaea.chunk.js": "/peech-webapp/static/js/935.96dddaea.chunk.js",
@@ -11,7 +11,7 @@
     "static/js/163.d682bcb5.chunk.js": "/peech-webapp/static/js/163.d682bcb5.chunk.js",
     "index.html": "/peech-webapp/index.html",
     "main.db32b7e6.css.map": "/peech-webapp/static/css/main.db32b7e6.css.map",
-    "main.8493175e.js.map": "/peech-webapp/static/js/main.8493175e.js.map",
+    "main.285d9d74.js.map": "/peech-webapp/static/js/main.285d9d74.js.map",
     "896.4f7ccddc.chunk.js.map": "/peech-webapp/static/js/896.4f7ccddc.chunk.js.map",
     "501.9d3962bd.chunk.js.map": "/peech-webapp/static/js/501.9d3962bd.chunk.js.map",
     "935.96dddaea.chunk.js.map": "/peech-webapp/static/js/935.96dddaea.chunk.js.map",
@@ -22,6 +22,6 @@
   },
   "entrypoints": [
     "static/css/main.db32b7e6.css",
-    "static/js/main.8493175e.js"
+    "static/js/main.285d9d74.js"
   ]
 }
