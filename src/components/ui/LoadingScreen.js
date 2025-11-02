@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getPublicAssetPath } from "../../utils/utils";
 
 const LoadingScreen = ({ onComplete, duration = 3000 }) => {
   const [isVisible, setIsVisible] = useState(true);
@@ -53,7 +54,7 @@ const LoadingScreen = ({ onComplete, duration = 3000 }) => {
             >
               <div className="relative w-20 h-20 flex items-center justify-center">
                 <motion.img
-                  src="/peech-logo-removebg-preview.png"
+                  src={getPublicAssetPath("peech-logo-removebg-preview.png")}
                   alt="Peech Logo"
                   className="w-20 h-20 object-contain"
                   initial={{ scale: 0, rotate: -180 }}

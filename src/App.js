@@ -5,9 +5,9 @@ import Header from "./components/layout/Header";
 import Footer from "./components/sections/Footer";
 import LoadingScreen from "./components/ui/LoadingScreen";
 import ScrollToTop from "./components/ui/ScrollToTop";
+import HomePage from "./pages/HomePage"; // Import HomePage directly (most visited)
 
-// Import HomePage directly (most visited)
-import HomePage from "./pages/HomePage";
+// We don't need a basename anymore since we're using a custom domain
 
 // Lazy load other pages for better performance
 const SolutionsPage = lazy(() => import("./pages/SolutionsPage"));
@@ -61,6 +61,7 @@ function App() {
                 >
                   <Routes>
                     <Route path="/" element={<HomePage />} />
+                    <Route path="/home" element={<HomePage />} />
                     <Route path="/solutions" element={<SolutionsPage />} />
                     <Route path="/resources" element={<ResourcesPage />} />
                     <Route path="/about" element={<AboutPage />} />
