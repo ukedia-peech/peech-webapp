@@ -159,12 +159,12 @@ const UseCases = () => {
         </svg>
       ),
       description:
-        "Accelerate software delivery, optimize DevOps pipelines, and improve incident resolution by visualizing development workflows and identifying deployment bottlenecks.",
+        "Transform IT operations and software development by analyzing system processes, identifying performance bottlenecks, and optimizing resource allocation through advanced process mining.",
       features: [
-        "DevOps pipeline optimization",
-        "Release cycle acceleration",
-        "Incident response analysis",
-        "Sprint efficiency tracking",
+        "IT service process optimization",
+        "System performance bottleneck analysis",
+        "Cloud resource utilization tracking",
+        "Software development workflow enhancement",
       ],
       color: "from-gray-500 to-gray-700",
     },
