@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="/peech-logo-removebg-preview.png" />
+    <link rel="icon" href="%PUBLIC_URL%/peech-logo-removebg-preview.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f97316" />
     <meta
@@ -26,7 +26,7 @@
       property="og:description"
       content="Transform your business with AI-powered intelligence. Unlock unprecedented insights and automate complex processes."
     />
-    <meta property="og:image" content="/og-image.jpg" />
+    <meta property="og:image" content="%PUBLIC_URL%/og-image.jpg" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -39,10 +39,10 @@
       property="twitter:description"
       content="Transform your business with AI-powered intelligence. Unlock unprecedented insights and automate complex processes."
     />
-    <meta property="twitter:image" content="/og-image.jpg" />
+    <meta property="twitter:image" content="%PUBLIC_URL%/og-image.jpg" />
 
-    <link rel="apple-touch-icon" href="/logo192.png" />
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
     <!-- Preconnect to external domains for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -72,17 +72,29 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <!-- Single Page App Redirect Handler -->
-    <script>
-      // Save the current path to sessionStorage before potential 404 redirect
-      // This works with the 404.html redirect script
-      (function() {
-        var l = window.location;
-        if (l.pathname !== '/' && l.pathname !== '/index.html') {
-          sessionStorage.redirect = l.href;
-        }
-      })();
-    </script>
     <div id="root"></div>
+    <!-- Single Page Apps for GitHub Pages -->
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // MIT License
+      // https://github.com/rafgraph/spa-github-pages
+      // This script checks to see if a redirect is present in the query string,
+      // converts it back into the correct url and adds it to the
+      // browser's history using window.history.replaceState(...),
+      // which won't cause the browser to attempt to load the new url.
+      // When the single page app is loaded further down in this file,
+      // the correct url will be waiting in the browser's history for
+      // the single page app to route accordingly.
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
   </body>
 </html>
