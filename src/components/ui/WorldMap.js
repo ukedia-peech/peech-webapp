@@ -13,173 +13,81 @@ export function WorldMap({
   const svgRef = useRef(null);
   const [hoveredLocation, setHoveredLocation] = useState(null);
 
-  const map = useMemo(
-    () => new DottedMap({ height: 60, grid: "diagonal" }),
-    []
-  );
-
-  const svgMap = useMemo(
-    () =>
-      map.getSVG({
-        radius: 0.25,
-        color: "#FFFFFF40", // Brighter dots for better contrast
-        shape: "circle",
-        backgroundColor: "transparent",
-      }),
-    [map]
-  );
-
-  const projectPoint = (lat, lng) => {
-    const x = (lng + 180) * (800 / 360);
-    const y = (90 - lat) * (400 / 180);
-    return { x, y };
-  };
-
-  const createCurvedPath = (start, end) => {
-    const midX = (start.x + end.x) / 2;
-    const midY = Math.min(start.y, end.y) - 50;
-    return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
-  };
-
-  // Calculate animation timing
-  const staggerDelay = 0.3;
-  const totalAnimationTime = dots.length * staggerDelay + animationDuration;
-  const pauseTime = 2; // Pause for 2 seconds when all paths are drawn
-  const fullCycleDuration = totalAnimationTime + pauseTime;
-
-  // Deduplicate points to avoid rendering the same location multiple times
-  const uniquePoints = useMemo(() => {
-    const pointsMap = new Map();
+  // Collect unique locations and generate SVG with pins using DottedMap's native methods
+  const { svgMapWithPins, locations } = useMemo(() => {
+    const map = new DottedMap({ height: 60, grid: "diagonal" });
     
+    // Collect unique locations
+    const locationsMap = new Map();
     dots.forEach((dot) => {
       const startKey = `${dot.start.lat},${dot.start.lng}`;
       const endKey = `${dot.end.lat},${dot.end.lng}`;
-      
-      if (!pointsMap.has(startKey)) {
-        pointsMap.set(startKey, {
-          ...dot.start,
-          x: projectPoint(dot.start.lat, dot.start.lng).x,
-          y: projectPoint(dot.start.lat, dot.start.lng).y,
-        });
+      if (!locationsMap.has(startKey)) {
+        locationsMap.set(startKey, dot.start);
       }
-      
-      if (!pointsMap.has(endKey)) {
-        pointsMap.set(endKey, {
-          ...dot.end,
-          x: projectPoint(dot.end.lat, dot.end.lng).x,
-          y: projectPoint(dot.end.lat, dot.end.lng).y,
-        });
+      if (!locationsMap.has(endKey)) {
+        locationsMap.set(endKey, dot.end);
       }
     });
-    
-    return Array.from(pointsMap.values());
-  }, [dots]);
+
+    // Add pins to the map using DottedMap's native addPin method
+    const locs = Array.from(locationsMap.values());
+    locs.forEach((loc) => {
+      map.addPin({
+        lat: loc.lat,
+        lng: loc.lng,
+        svgOptions: { color: lineColor, radius: 0.8 },
+      });
+    });
+
+    // Get SVG with the pins rendered by DottedMap
+    const svg = map.getSVG({
+      radius: 0.25,
+      color: "#FFFFFF40",
+      shape: "circle",
+      backgroundColor: "transparent",
+    });
+
+    return { svgMapWithPins: svg, locations: locs };
+  }, [dots, lineColor]);
 
   return (
-    <div className="w-full aspect-[2/1] md:aspect-[2.5/1] lg:aspect-[2/1] bg-gradient-to-br from-black-900 to-black-800 rounded-2xl relative font-sans overflow-hidden border border-primary-500/20">
-      <img
-        src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
-        className="h-full w-full pointer-events-none select-none object-cover opacity-40"
-        alt="world map"
-        draggable={false}
+    <div className="w-full aspect-[2/1] bg-gradient-to-br from-black-900 to-black-800 rounded-2xl relative font-sans overflow-hidden border border-primary-500/20">
+      {/* Render the SVG map with pins directly from DottedMap */}
+      <div 
+        className="h-full w-full"
+        dangerouslySetInnerHTML={{ __html: svgMapWithPins }}
+        style={{ opacity: 0.6 }}
       />
-      <svg
-        ref={svgRef}
-        viewBox="0 0 800 400"
-        className="w-full h-full absolute inset-0 pointer-events-auto select-none"
-        preserveAspectRatio="xMidYMid meet"
-      >
-        <defs>
-          <linearGradient id="path-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="white" stopOpacity="0" />
-            <stop offset="5%" stopColor={lineColor} stopOpacity="1" />
-            <stop offset="95%" stopColor={lineColor} stopOpacity="1" />
-            <stop offset="100%" stopColor="white" stopOpacity="0" />
-          </linearGradient>
-
-          <filter id="glow">
-            <feMorphology operator="dilate" radius="0.5" />
-            <feGaussianBlur stdDeviation="2" result="coloredBlur" />
-            <feMerge>
-              <feMergeNode in="coloredBlur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-
-        {/* Animated lines removed as per user request */}
-
-        {/* Render unique points only once */}
-        {uniquePoints.map((point, i) => (
-          <g key={`point-${i}`}>
-            <motion.g
-              onHoverStart={() =>
-                setHoveredLocation(point.label || `Location ${i}`)
-              }
-              onHoverEnd={() => setHoveredLocation(null)}
-              className="cursor-pointer"
-              whileHover={{ scale: 1.2 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+      
+      {/* Labels overlay - positioned using CSS */}
+      <div className="absolute inset-0 pointer-events-none">
+        {showLabels && locations.map((loc, i) => {
+          // Convert lat/lng to percentage position for CSS positioning
+          // Using equirectangular projection
+          const xPercent = ((loc.lng + 180) / 360) * 100;
+          const yPercent = ((90 - loc.lat) / 180) * 100;
+          
+          return (
+            <motion.div
+              key={`label-${i}`}
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 * i, duration: 0.5 }}
+              className="absolute transform -translate-x-1/2 -translate-y-full"
+              style={{
+                left: `${xPercent}%`,
+                top: `${yPercent}%`,
+                marginTop: '-8px',
+              }}
             >
-              <circle
-                cx={point.x}
-                cy={point.y}
-                r="4"
-                fill={lineColor}
-                filter="url(#glow)"
-                className="drop-shadow-lg"
-              />
-              <circle
-                cx={point.x}
-                cy={point.y}
-                r="4"
-                fill={lineColor}
-                opacity="0.5"
-              >
-                <animate
-                  attributeName="r"
-                  from="4"
-                  to="16"
-                  dur="2s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-                <animate
-                  attributeName="opacity"
-                  from="0.6"
-                  to="0"
-                  dur="2s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-              </circle>
-            </motion.g>
-
-            {showLabels && point.label && (
-              <motion.g
-                initial={{ opacity: 0, y: 5 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 * i, duration: 0.5 }}
-                className="pointer-events-none"
-              >
-                <foreignObject
-                  x={point.x - 50}
-                  y={point.y - 35}
-                  width="100"
-                  height="26"
-                  className="block"
-                >
-                  <div className="flex items-center justify-center h-full">
-                    <span className="text-[10px] sm:text-[11px] font-semibold px-2.5 py-1 rounded-md bg-gray-900/90 text-white backdrop-blur-sm shadow-xl whitespace-nowrap">
-                      {point.label}
-                    </span>
-                  </div>
-                </foreignObject>
-              </motion.g>
-            )}
-          </g>
-        ))}
-      </svg>
+              <span className="text-[9px] sm:text-[10px] font-semibold px-2 py-0.5 rounded bg-gray-900/90 text-white backdrop-blur-sm shadow-xl whitespace-nowrap border border-gray-700/50">
+                {loc.label}
+              </span>
+            </motion.div>
+          );
+        })}
+      </div>
 
       {/* Mobile Tooltip */}
       <AnimatePresence>

@@ -5,6 +5,7 @@ const ProcessMiningVisualization = ({
   className = '',
   title = 'Process Mining',
   centerText = 'CELONIS',
+  showLogo = false,
   accentColor = '#0066cc',
   processSteps = {
     first: 'Extract',
@@ -40,14 +41,24 @@ const ProcessMiningVisualization = ({
             backgroundColor: `${accentColor}15`
           }}
         >
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-            className="text-xs font-bold text-white text-center"
-            style={{ color: accentColor }}
-          >
-            {centerText}
-          </motion.div>
+          {showLogo ? (
+            <motion.img
+              src="/peech-logo-removebg-preview.png"
+              alt="Peech"
+              className="w-12 h-12 object-contain"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            />
+          ) : (
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+              className="text-xs font-bold text-white text-center"
+              style={{ color: accentColor }}
+            >
+              {centerText}
+            </motion.div>
+          )}
         </div>
 
         {/* Process Flow Nodes */}
@@ -180,9 +191,11 @@ const ProcessMiningVisualization = ({
       </div>
 
       {/* Title */}
-      <div className="text-center mt-4">
-        <h3 className="text-sm font-medium text-gray-300">{title}</h3>
-      </div>
+      {title && (
+        <div className="text-center mt-4">
+          <h3 className="text-sm font-medium text-gray-300">{title}</h3>
+        </div>
+      )}
     </div>
   );
 };

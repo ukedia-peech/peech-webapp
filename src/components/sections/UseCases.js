@@ -4,37 +4,12 @@ import { tabVariants } from "../../utils/animations";
 
 const UseCases = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const [activeCategory, setActiveCategory] = useState("industry"); // "industry" or "process"
   const intervalRef = useRef(null);
 
-  // Auto-slide functionality
-  useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      setActiveTab((prevTab) => (prevTab + 1) % useCases.length);
-    }, 6000);
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, []);
-
-  // Reset interval when user manually changes tab
-  const handleTabClick = (index) => {
-    setActiveTab(index);
-    // Clear existing interval
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-    // Start new interval
-    intervalRef.current = setInterval(() => {
-      setActiveTab((prevTab) => (prevTab + 1) % useCases.length);
-    }, 6000);
-  };
-
-  const useCases = [
+  const industryUseCases = [
     {
-      title: "Financial Services",
+      title: "Retail & CPG",
       icon: (
         <svg
           className="w-6 h-6"
@@ -46,46 +21,19 @@ const UseCases = () => {
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
-            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
           />
         </svg>
       ),
       description:
-        "Optimize loan processing, compliance workflows, and fraud detection by visualizing end-to-end transaction processes and identifying bottlenecks in real-time.",
+        "Transform order fulfillment, optimize inventory management, and reduce return processing times by analyzing customer journey touchpoints and warehouse operations.",
       features: [
-        "Loan origination process optimization",
-        "Compliance workflow monitoring",
-        "Fraud pattern detection",
-        "Customer onboarding acceleration",
+        "Order-to-delivery optimization",
+        "Inventory turnover analysis",
+        "Return process efficiency",
+        "Customer journey mapping",
       ],
-      color: "from-blue-500 to-indigo-600",
-    },
-    {
-      title: "Healthcare",
-      icon: (
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-          />
-        </svg>
-      ),
-      description:
-        "Enhance patient care and operational efficiency by analyzing clinical pathways, reducing wait times, and optimizing resource allocation across departments.",
-      features: [
-        "Patient journey optimization",
-        "Clinical pathway analysis",
-        "Resource allocation efficiency",
-        "Appointment scheduling optimization",
-      ],
-      color: "from-green-500 to-emerald-600",
+      color: "from-purple-500 to-pink-600",
     },
     {
       title: "Manufacturing",
@@ -115,7 +63,7 @@ const UseCases = () => {
       color: "from-orange-500 to-red-600",
     },
     {
-      title: "Retail & E-commerce",
+      title: "Healthcare & Life Sciences",
       icon: (
         <svg
           className="w-6 h-6"
@@ -127,19 +75,46 @@ const UseCases = () => {
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
-            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
           />
         </svg>
       ),
       description:
-        "Transform order fulfillment, optimize inventory management, and reduce return processing times by analyzing customer journey touchpoints and warehouse operations.",
+        "Enhance patient care and operational efficiency by analyzing clinical pathways, reducing wait times, and optimizing resource allocation across departments.",
       features: [
-        "Order-to-delivery optimization",
-        "Inventory turnover analysis",
-        "Return process efficiency",
-        "Customer journey mapping",
+        "Patient journey optimization",
+        "Clinical pathway analysis",
+        "Resource allocation efficiency",
+        "Appointment scheduling optimization",
       ],
-      color: "from-purple-500 to-pink-600",
+      color: "from-green-500 to-emerald-600",
+    },
+    {
+      title: "Automotive",
+      icon: (
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M8 7h8m-8 5h8m-4-9v2m-6 8h.01M6 17h.01M18 17h.01M18 13h.01M6 13h.01M4 21h16a1 1 0 001-1v-4a1 1 0 00-1-1h-1l-2-6H7L5 15H4a1 1 0 00-1 1v4a1 1 0 001 1z"
+          />
+        </svg>
+      ),
+      description:
+        "Accelerate automotive innovation by optimizing production lines, streamlining supply chains, and enhancing quality control through data-driven process intelligence.",
+      features: [
+        "Production line optimization",
+        "Supply chain resilience",
+        "Quality assurance automation",
+        "Dealer network efficiency",
+      ],
+      color: "from-red-500 to-rose-600",
     },
     {
       title: "Technology",
@@ -166,9 +141,244 @@ const UseCases = () => {
         "Cloud resource utilization tracking",
         "Software development workflow enhancement",
       ],
-      color: "from-gray-500 to-gray-700",
+      color: "from-cyan-500 to-blue-600",
+    },
+    {
+      title: "Financial Services",
+      icon: (
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+      ),
+      description:
+        "Optimize loan processing, compliance workflows, and fraud detection by visualizing end-to-end transaction processes and identifying bottlenecks in real-time.",
+      features: [
+        "Loan origination process optimization",
+        "Compliance workflow monitoring",
+        "Fraud pattern detection",
+        "Customer onboarding acceleration",
+      ],
+      color: "from-blue-500 to-indigo-600",
     },
   ];
+
+  const processUseCases = [
+    {
+      title: "Accounts Payable",
+      icon: (
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
+          />
+        </svg>
+      ),
+      description:
+        "Streamline invoice processing, reduce payment delays, and optimize cash flow management by identifying bottlenecks and automating approval workflows.",
+      features: [
+        "Invoice processing automation",
+        "Payment cycle optimization",
+        "Duplicate payment detection",
+        "Vendor management efficiency",
+      ],
+      color: "from-emerald-500 to-teal-600",
+    },
+    {
+      title: "Accounts Receivable",
+      icon: (
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+          />
+        </svg>
+      ),
+      description:
+        "Accelerate collections, reduce DSO, and improve cash flow by analyzing payment patterns and optimizing dunning processes.",
+      features: [
+        "Collection process optimization",
+        "DSO reduction strategies",
+        "Payment behavior analysis",
+        "Credit risk assessment",
+      ],
+      color: "from-violet-500 to-purple-600",
+    },
+    {
+      title: "Order Management",
+      icon: (
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+          />
+        </svg>
+      ),
+      description:
+        "Optimize order-to-cash cycles, reduce fulfillment times, and improve customer satisfaction through end-to-end order visibility.",
+      features: [
+        "Order cycle time reduction",
+        "Fulfillment optimization",
+        "Backorder management",
+        "Customer delivery tracking",
+      ],
+      color: "from-amber-500 to-orange-600",
+    },
+    {
+      title: "Procurement",
+      icon: (
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+          />
+        </svg>
+      ),
+      description:
+        "Enhance procurement efficiency, ensure compliance, and reduce maverick spending through transparent procure-to-pay processes.",
+      features: [
+        "Procure-to-pay optimization",
+        "Maverick spending detection",
+        "Supplier performance tracking",
+        "Contract compliance monitoring",
+      ],
+      color: "from-rose-500 to-pink-600",
+    },
+    {
+      title: "Supply Chain",
+      icon: (
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M13 10V3L4 14h7v7l9-11h-7z"
+          />
+        </svg>
+      ),
+      description:
+        "Build resilient supply chains by identifying vulnerabilities, optimizing logistics, and improving supplier collaboration.",
+      features: [
+        "End-to-end visibility",
+        "Logistics optimization",
+        "Risk identification",
+        "Supplier collaboration",
+      ],
+      color: "from-sky-500 to-blue-600",
+    },
+    {
+      title: "Customer Service",
+      icon: (
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
+          />
+        </svg>
+      ),
+      description:
+        "Elevate customer experience by optimizing service processes, reducing resolution times, and improving first-contact resolution rates.",
+      features: [
+        "Ticket resolution optimization",
+        "First-contact resolution improvement",
+        "Service level compliance",
+        "Customer journey analysis",
+      ],
+      color: "from-indigo-500 to-violet-600",
+    },
+  ];
+
+  const useCases = activeCategory === "industry" ? industryUseCases : processUseCases;
+
+  // Auto-slide functionality
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setActiveTab((prevTab) => (prevTab + 1) % useCases.length);
+    }, 6000);
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [useCases.length]);
+
+  // Reset tab when category changes
+  useEffect(() => {
+    setActiveTab(0);
+  }, [activeCategory]);
+
+  // Reset interval when user manually changes tab
+  const handleTabClick = (index) => {
+    setActiveTab(index);
+    // Clear existing interval
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    // Start new interval
+    intervalRef.current = setInterval(() => {
+      setActiveTab((prevTab) => (prevTab + 1) % useCases.length);
+    }, 6000);
+  };
+
+  const handleCategoryChange = (category) => {
+    setActiveCategory(category);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    intervalRef.current = setInterval(() => {
+      setActiveTab((prevTab) => (prevTab + 1) % (category === "industry" ? industryUseCases.length : processUseCases.length));
+    }, 6000);
+  };
 
   return (
     <section id="resources" className="section-padding bg-black-900">
@@ -179,38 +389,67 @@ const UseCases = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12 sm:mb-16 px-4"
+          className="text-center mb-8 sm:mb-12 px-4"
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
-            Solutions for Every <span className="gradient-text">Industry</span>
+            Solutions for Every{" "}
+            <span className="gradient-text">
+              {activeCategory === "industry" ? "Industry" : "Process"}
+            </span>
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
-            Discover how process mining is revolutionizing operations and
-            unlocking value across industries.
+          <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-8">
+            {activeCategory === "industry"
+              ? "Discover how process mining is revolutionizing operations and unlocking value across industries."
+              : "Optimize your core business processes with data-driven insights and intelligent automation."}
           </p>
+
+          {/* Category Toggle */}
+          <div className="inline-flex items-center p-1 bg-black-800 rounded-full border border-black-700">
+            <button
+              onClick={() => handleCategoryChange("industry")}
+              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                activeCategory === "industry"
+                  ? "bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-lg"
+                  : "text-gray-400 hover:text-white"
+              }`}
+            >
+              By Industry
+            </button>
+            <button
+              onClick={() => handleCategoryChange("process")}
+              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                activeCategory === "process"
+                  ? "bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-lg"
+                  : "text-gray-400 hover:text-white"
+              }`}
+            >
+              By Process
+            </button>
+          </div>
         </motion.div>
 
         {/* Tab Navigation */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12 px-4">
-          {useCases.map((useCase, index) => (
-            <motion.button
-              key={index}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => handleTabClick(index)}
-              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium transition-all duration-300 text-sm sm:text-base flex items-center ${
-                activeTab === index
-                  ? "bg-primary-500 text-white shadow-lg"
-                  : "bg-black-800 text-gray-400 hover:bg-black-700 border border-black-700"
-              }`}
-            >
-              <span className="mr-1 sm:mr-2 inline-flex items-center">
-                {useCase.icon}
-              </span>
-              <span className="hidden sm:inline">{useCase.title}</span>
-              <span className="sm:hidden">{useCase.title.split(" ")[0]}</span>
-            </motion.button>
-          ))}
+        <div className="flex justify-center mb-12 px-4">
+          <div className="flex flex-nowrap gap-2 overflow-x-auto pb-2 scrollbar-hide">
+            {useCases.map((useCase, index) => (
+              <motion.button
+                key={index}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleTabClick(index)}
+                className={`px-4 py-2 rounded-full font-medium transition-all duration-300 text-sm flex items-center whitespace-nowrap flex-shrink-0 ${
+                  activeTab === index
+                    ? "bg-primary-500 text-white shadow-lg"
+                    : "bg-black-800 text-gray-400 hover:bg-black-700 border border-black-700"
+                }`}
+              >
+                <span className="mr-2 inline-flex items-center">
+                  {useCase.icon}
+                </span>
+                {useCase.title}
+              </motion.button>
+            ))}
+          </div>
         </div>
 
         {/* Tab Content */}

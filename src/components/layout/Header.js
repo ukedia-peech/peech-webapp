@@ -28,6 +28,15 @@ const Header = () => {
     setIsOpen(false);
   };
 
+  const scrollToContactForm = (e) => {
+    e.preventDefault();
+    setIsOpen(false);
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <>
       <motion.header
@@ -119,12 +128,12 @@ const Header = () => {
               transition={{ delay: 0.3, duration: 0.4 }}
               className="hidden lg:block"
             >
-              <Link to="/contact">
-                <motion.button
-                  whileHover={{ scale: 1.02, y: -1 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="group relative"
-                >
+              <motion.button
+                onClick={scrollToContactForm}
+                whileHover={{ scale: 1.02, y: -1 }}
+                whileTap={{ scale: 0.98 }}
+                className="group relative"
+              >
                 {/* Glowing border effect */}
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-500 via-orange-500 to-primary-600 rounded-xl opacity-60 group-hover:opacity-100 blur-sm transition duration-300"></div>
 
@@ -160,7 +169,6 @@ const Header = () => {
                   <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700"></div>
                 </div>
               </motion.button>
-              </Link>
             </motion.div>
 
             {/* Mobile Menu Button - Refined Animation */}
@@ -290,11 +298,12 @@ const Header = () => {
                 }}
                 className="mt-8"
               >
-                <Link to="/contact" onClick={handleNavClick}>
-                  <button className="w-full px-6 py-4 bg-gradient-to-r from-primary-500 to-orange-500 text-white text-base font-semibold rounded-xl shadow-2xl shadow-primary-500/30">
-                    Get Started
-                  </button>
-                </Link>
+                <button
+                  onClick={scrollToContactForm}
+                  className="w-full px-6 py-4 bg-gradient-to-r from-primary-500 to-orange-500 text-white text-base font-semibold rounded-xl shadow-2xl shadow-primary-500/30"
+                >
+                  Get Started
+                </button>
               </motion.div>
 
               {/* Mobile Footer Info */}

@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { backgroundAnimations, customEasing } from "../../utils/animations";
 import AnimatedBackground from "../ui/AnimatedBackground";
@@ -50,21 +49,15 @@ const Hero = () => {
           animate="visible"
           className="text-center max-w-5xl mx-auto"
         >
-          {/* Badge */}
+          {/* Badge - Non-clickable indicator */}
           <motion.div
-            className="inline-flex items-center px-4 py-2 rounded-full bg-black-900 border border-primary-500 text-primary-500 text-sm font-medium mb-8"
+            className="inline-flex items-center px-4 py-2 rounded-full bg-black-900/50 border border-primary-500/40 text-primary-400/80 text-sm font-medium mb-8 cursor-default select-none"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.5, ease: customEasing.bounce }}
           >
-            <motion.span
-              className="w-2 h-2 bg-primary-500 rounded-full mr-2"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: customEasing.fluid,
-              }}
+            <span
+              className="w-2 h-2 bg-primary-500/60 rounded-full mr-2"
             />
             Trusted by Fortune 500 - Process Mining Excellence
           </motion.div>
@@ -113,12 +106,17 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.5, ease: customEasing.fluid }}
           >
-            <Link to="/contact">
-              <motion.button
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                className="group relative"
-              >
+            <motion.button
+              onClick={() => {
+                const contactForm = document.getElementById('contact-form');
+                if (contactForm) {
+                  contactForm.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="group relative"
+            >
                 {/* Glowing border effect */}
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-500 via-orange-500 to-primary-600 rounded-2xl opacity-75 group-hover:opacity-100 blur group-hover:blur-md transition duration-500 animate-gradient-x"></div>
 
@@ -165,7 +163,6 @@ const Hero = () => {
                   <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 ease-in-out"></div>
                 </div>
               </motion.button>
-            </Link>
           </motion.div>
 
           {/* Stats with Animated Counters */}

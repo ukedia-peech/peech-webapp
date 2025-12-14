@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { getPublicAssetPath } from "../../utils/utils";
 
-const Footer = () => {
+const Footer = ({ hideContactForm = false }) => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    company: '',
+    subject: '',
+    message: ''
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form submitted:', formData);
+    setFormData({ firstName: '', lastName: '', email: '', company: '', subject: '', message: '' });
+  };
+
   return (
-    <footer className="relative bg-gradient-to-b from-black-900 to-black-950 text-white overflow-hidden">
+    <footer id="contact-form" className="relative bg-gradient-to-b from-black-900 to-black-950 text-white overflow-hidden">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-5">
         <div
@@ -16,9 +36,9 @@ const Footer = () => {
         ></div>
       </div>
 
-      <div className="relative container-custom py-16 px-4 sm:px-6 lg:px-8">
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="relative container-custom py-12 px-4 sm:px-6 lg:px-8">
+        {/* Main Content Grid - 3 columns when form is shown */}
+        <div className={`grid grid-cols-1 ${hideContactForm ? 'lg:grid-cols-2' : 'lg:grid-cols-3'} gap-8 lg:gap-10 items-stretch`}>
           {/* LEFT SIDE: Brand & Contact */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -122,22 +142,108 @@ const Footer = () => {
             </div>
           </motion.div>
 
-          {/* RIGHT SIDE: Celonis Gold Partner - Large & Prominent */}
+          {/* MIDDLE: Compact Contact Form */}
+          {!hideContactForm && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="w-full"
+            >
+              <div className="bg-black-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-5">
+                <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
+                  Send us a Message
+                </h3>
+                <form onSubmit={handleSubmit} className="space-y-3">
+                  <div className="grid grid-cols-2 gap-2">
+                    <input
+                      type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-3 py-2 bg-black-900 border border-gray-700 rounded-lg text-white text-sm placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary-500 transition-all"
+                      placeholder="First Name *"
+                    />
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-3 py-2 bg-black-900 border border-gray-700 rounded-lg text-white text-sm placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary-500 transition-all"
+                      placeholder="Last Name *"
+                    />
+                  </div>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-3 py-2 bg-black-900 border border-gray-700 rounded-lg text-white text-sm placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary-500 transition-all"
+                    placeholder="Email Address *"
+                  />
+                  <input
+                    type="text"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 bg-black-900 border border-gray-700 rounded-lg text-white text-sm placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary-500 transition-all"
+                    placeholder="Company"
+                  />
+                  <select
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-3 py-2 bg-black-900 border border-gray-700 rounded-lg text-white text-sm focus:outline-none focus:ring-1 focus:ring-primary-500 transition-all"
+                  >
+                    <option value="">Select a subject *</option>
+                    <option value="celonis">Celonis Implementation</option>
+                    <option value="process-mining">Process Mining Consulting</option>
+                    <option value="partnership">Partnership Inquiry</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                    rows={3}
+                    className="w-full px-3 py-2 bg-black-900 border border-gray-700 rounded-lg text-white text-sm placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary-500 transition-all resize-none"
+                    placeholder="Message *"
+                  />
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    type="submit"
+                    className="w-full py-2.5 bg-gradient-to-r from-primary-500 to-orange-500 text-white text-sm font-semibold rounded-lg shadow-lg shadow-primary-500/20 hover:shadow-primary-500/30 transition-all"
+                  >
+                    Send Message
+                  </motion.button>
+                </form>
+              </div>
+            </motion.div>
+          )}
+
+          {/* RIGHT SIDE: Celonis Gold Partner */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="flex items-center justify-center lg:justify-end"
+            className="flex items-stretch justify-center lg:justify-end"
           >
-            <div className="relative group">
+            <div className="relative group w-full">
               {/* Glow effect behind logo */}
               <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
               {/* Partner badge container */}
-              <div className="relative bg-gradient-to-br from-black-800/50 to-black-900/50 backdrop-blur-sm border border-yellow-500/20 rounded-2xl p-8 sm:p-10 lg:p-12 shadow-2xl hover:border-yellow-500/40 transition-all duration-500">
-                <div className="text-center mb-6">
-                  <span className="inline-block px-4 py-1.5 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/30 rounded-full text-yellow-500 text-xs font-semibold uppercase tracking-wider mb-2">
+              <div className="relative h-full bg-gradient-to-br from-black-800/50 to-black-900/50 backdrop-blur-sm border border-yellow-500/20 rounded-2xl p-6 shadow-2xl hover:border-yellow-500/40 transition-all duration-500 flex flex-col items-center justify-center">
+                <div className="text-center mb-4">
+                  <span className="inline-block px-3 py-1 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/30 rounded-full text-yellow-500 text-xs font-semibold uppercase tracking-wider">
                     Certified Partner
                   </span>
                 </div>
@@ -145,15 +251,14 @@ const Footer = () => {
                 <img
                   src={getPublicAssetPath("Celonis-Gold.png")}
                   alt="Celonis Gold Partner"
-                  className="h-32 sm:h-40 md:h-48 lg:h-56 xl:h-64 w-auto object-contain mx-auto filter drop-shadow-2xl"
+                  className="h-28 sm:h-32 md:h-40 w-auto object-contain mx-auto filter drop-shadow-2xl"
                   onError={(e) => {
                     e.target.style.display = "none";
                   }}
                 />
 
-                <p className="mt-6 text-gray-400 text-xs text-center max-w-xs mx-auto">
-                  Recognized excellence in process intelligence and enterprise
-                  transformation
+                <p className="mt-4 text-gray-400 text-xs text-center max-w-xs mx-auto">
+                  Recognized excellence in process intelligence
                 </p>
               </div>
             </div>

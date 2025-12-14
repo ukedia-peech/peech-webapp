@@ -24,7 +24,7 @@ const CelonisShowcase = () => {
               visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
             }}
           >
-            End-to-End Process Transformation
+            The Peech 4F Formula
           </motion.h2>
           <motion.p
             className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto px-4"
@@ -58,7 +58,8 @@ const CelonisShowcase = () => {
           >
             <ProcessMiningVisualization
               className="mx-auto"
-              centerText="PEECH"
+              centerText=""
+              showLogo={true}
               accentColor="#f97316"
               processSteps={{
                 first: "Find",
@@ -66,6 +67,7 @@ const CelonisShowcase = () => {
                 third: "Fix",
                 fourth: "Flow",
               }}
+              title=""
             />
           </motion.div>
 

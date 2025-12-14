@@ -64,7 +64,7 @@ const ContactPage = () => {
                         label: "NYC, NY",
                       },
                       end: {
-                        lat: 17.385,
+                        lat: 17.3850,
                         lng: 78.4867,
                         label: "Hyderabad, India",
                       },
@@ -72,11 +72,11 @@ const ContactPage = () => {
                     {
                       start: {
                         lat: 51.5074,
-                        lng: -18.0,
+                        lng: -0.1278,
                         label: "London, UK",
                       },
                       end: {
-                        lat: 17.385,
+                        lat: 17.3850,
                         lng: 78.4867,
                         label: "Hyderabad, India",
                       },
@@ -88,7 +88,7 @@ const ContactPage = () => {
                         label: "Warsaw, Poland",
                       },
                       end: {
-                        lat: 17.385,
+                        lat: 17.3850,
                         lng: 78.4867,
                         label: "Hyderabad, India",
                       },
@@ -100,7 +100,7 @@ const ContactPage = () => {
                         label: "Dubai, UAE",
                       },
                       end: {
-                        lat: 17.385,
+                        lat: 17.3850,
                         lng: 78.4867,
                         label: "Hyderabad, India",
                       },
@@ -112,7 +112,7 @@ const ContactPage = () => {
                         label: "Jakarta, Indonesia",
                       },
                       end: {
-                        lat: 17.385,
+                        lat: 17.3850,
                         lng: 78.4867,
                         label: "Hyderabad, India",
                       },
