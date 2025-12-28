@@ -24,7 +24,9 @@ const CelonisShowcase = () => {
               visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
             }}
           >
-            The Peech 4F Formula
+            The Peech F
+            <sup className="text-orange-500 align-middle">4</sup>{" "}
+            Formula - Find. Frame. Fix. Flow.
           </motion.h2>
           <motion.p
             className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto px-4"

@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { customEasing } from "../../utils/animations";
 import DisplayCards from "../ui/DisplayCards";
 import { TiltedText, GradientText } from "../ui/AnimatedText";
+import FeaturesFlowLayout from "../ui/FeaturesFlowLayout";
+import FeaturesRadialLayout from "../ui/FeaturesRadialLayout";
 
 const Features = () => {
+  const [activeDraft, setActiveDraft] = useState(5);
+
+  // F-category configuration
+  const fCategories = {
+    Find: { color: "bg-blue-500", textColor: "text-blue-500", borderColor: "border-blue-500", gradient: "from-blue-500 to-blue-600" },
+    Frame: { color: "bg-purple-500", textColor: "text-purple-500", borderColor: "border-purple-500", gradient: "from-purple-500 to-violet-500" },
+    Fix: { color: "bg-orange-500", textColor: "text-orange-500", borderColor: "border-orange-500", gradient: "from-orange-500 to-red-500" },
+    Flow: { color: "bg-green-500", textColor: "text-green-500", borderColor: "border-green-500", gradient: "from-green-500 to-emerald-500" },
+  };
+
   const features = [
     {
       icon: (
@@ -26,6 +38,7 @@ const Features = () => {
       description:
         "Discover actual business processes from system data, identify bottlenecks, and uncover hidden inefficiencies with industry-leading process mining technology.",
       color: "from-blue-500 via-blue-600 to-indigo-600",
+      fCategory: "Find",
     },
     {
       icon: (
@@ -47,6 +60,7 @@ const Features = () => {
       description:
         "Establish a sustainable Center of Excellence with our managed services. We provide ongoing support, governance frameworks, and continuous value delivery to sustain your process mining journey.",
       color: "from-violet-500 via-purple-500 to-fuchsia-600",
+      fCategory: "Flow",
     },
     {
       icon: (
@@ -68,6 +82,7 @@ const Features = () => {
       description:
         "Empower your teams with comprehensive training programs, certification paths, and hands-on workshops to build internal expertise and drive adoption across your organization.",
       color: "from-emerald-500 via-teal-500 to-cyan-600",
+      fCategory: "Flow",
     },
     {
       icon: (
@@ -89,6 +104,7 @@ const Features = () => {
       description:
         "Intelligent automation and predictive analytics powered by AI to optimize workflows, identify opportunities, and drive continuous improvement at scale.",
       color: "from-amber-500 via-orange-500 to-red-600",
+      fCategory: "Fix",
     },
     {
       icon: (
@@ -110,6 +126,7 @@ const Features = () => {
       description:
         "Analyze user interactions and desktop activities to identify automation opportunities and process improvements through advanced task mining.",
       color: "from-rose-500 via-pink-500 to-fuchsia-600",
+      fCategory: "Find",
     },
     {
       icon: (
@@ -131,8 +148,97 @@ const Features = () => {
       description:
         "Implement intelligent robotic process automation to streamline repetitive tasks and accelerate digital transformation with proven RPA frameworks.",
       color: "from-sky-500 via-blue-500 to-indigo-600",
+      fCategory: "Fix",
+    },
+    {
+      icon: (
+        <svg
+          className="w-8 h-8"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+          />
+        </svg>
+      ),
+      title: "Process Strategy & Value Framing",
+      description:
+        "Convert process mining insights into business-prioritized transformation opportunities.",
+      color: "from-purple-500 via-violet-500 to-fuchsia-600",
+      fCategory: "Frame",
+    },
+    {
+      icon: (
+        <svg
+          className="w-8 h-8"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+          />
+        </svg>
+      ),
+      title: "Transformation Roadmap & Governance Design",
+      description:
+        "Design structured transformation roadmaps with clear governance frameworks, milestones, and KPIs to ensure sustainable process excellence and organizational alignment.",
+      color: "from-indigo-500 via-purple-500 to-pink-600",
+      fCategory: "Frame",
     },
   ];
+
+  // Render F-category badge based on active draft
+  const renderFCategoryBadge = (feature, index) => {
+    const category = fCategories[feature.fCategory];
+    if (!category) return null;
+
+    switch (activeDraft) {
+      case 5:
+        // Draft 5: Glassmorphism - frosted glass effect
+        return (
+          <div className="absolute top-4 right-4 z-20">
+            <div className={`backdrop-blur-md bg-white/10 border border-white/20 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-lg`}>
+              <span className={`${category.textColor} drop-shadow-sm`}>{feature.fCategory}</span>
+            </div>
+          </div>
+        );
+      case 7:
+        // Draft 7: Animated pulse/glow effect
+        return (
+          <div className="absolute top-4 right-4 z-20">
+            <div className="relative">
+              <div className={`absolute inset-0 ${category.color} rounded-full blur-md opacity-60 animate-pulse`}></div>
+              <div className={`relative ${category.color} text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg`}>
+                {feature.fCategory}
+              </div>
+            </div>
+          </div>
+        );
+      case 10:
+        // Draft 10: Floating elevated card badge with icon
+        return (
+          <div className="absolute top-4 right-4 z-20">
+            <div className={`bg-black-800/90 backdrop-blur-sm border border-gray-700 rounded-lg px-3 py-2 shadow-xl flex items-center gap-2`}>
+              <div className={`w-5 h-5 rounded ${category.color} flex items-center justify-center`}>
+                <span className="text-white text-[10px] font-black">{feature.fCategory.charAt(0)}</span>
+              </div>
+              <span className="text-white text-xs font-semibold">{feature.fCategory}</span>
+            </div>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <section id="solutions" className="section-padding bg-black-950">
@@ -145,15 +251,38 @@ const Features = () => {
           transition={{ duration: 0.6, ease: customEasing.fluid }}
           className="text-center mb-16"
         >
-          <TiltedText
-            as="h2"
-            className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-6 px-4"
-          >
-            Powerful Features for{" "}
-            <GradientText gradient="from-primary-500 via-primary-400 to-primary-600">
-              Process Excellence
-            </GradientText>
-          </TiltedText>
+          <div className="flex items-center justify-center gap-4 mb-6 px-4">
+            <TiltedText
+              as="h2"
+              className="text-2xl sm:text-3xl md:text-5xl font-bold text-white"
+            >
+              Powerful Features for{" "}
+              <GradientText gradient="from-primary-500 via-primary-400 to-primary-600">
+                Process Excellence
+              </GradientText>
+            </TiltedText>
+            {/* Draft Selector Buttons */}
+            <div className="flex gap-2 justify-center">
+              {[
+                { value: 5, label: 'A' },
+                { value: 7, label: 'B' },
+                { value: 10, label: 'C' },
+                { value: 16, label: 'D' }
+              ].map((draft) => (
+                <button
+                  key={draft.value}
+                  onClick={() => setActiveDraft(draft.value)}
+                  className={`px-4 py-2 rounded-lg text-sm font-bold transition-all duration-300 ${
+                    activeDraft === draft.value
+                      ? "bg-orange-500 text-white shadow-lg shadow-orange-500/30 scale-105"
+                      : "bg-black-800 text-gray-400 hover:bg-black-700 hover:text-white border border-gray-700"
+                  }`}
+                >
+                  {draft.label}
+                </button>
+              ))}
+            </div>
+          </div>
           <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto px-4">
             Everything you need to transform your business processes with
             Celonis and comprehensive process mining solutions.
@@ -161,6 +290,11 @@ const Features = () => {
         </motion.div>
 
         {/* Features Cards with Creative Layout */}
+        {activeDraft === 16 ? (
+          <div className="max-w-7xl mx-auto px-4 overflow-x-auto">
+            <FeaturesRadialLayout features={features} />
+          </div>
+        ) : (
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {features.map((feature, index) => (
@@ -176,7 +310,10 @@ const Features = () => {
                 }}
                 className="group relative"
               >
-                <div className="relative bg-black-900/80 backdrop-blur-sm rounded-3xl p-8 border border-gray-800 hover:border-primary-500/50 transition-all duration-500 overflow-hidden h-full">
+                <div className={`relative bg-black-900/80 backdrop-blur-sm rounded-3xl p-8 border border-gray-800 hover:border-primary-500/50 transition-all duration-500 overflow-hidden h-full ${activeDraft === 4 ? 'pb-14' : ''}`}>
+                  {/* F-Category Badge for Drafts 2, 3, 4 */}
+                  {activeDraft !== 1 && renderFCategoryBadge(feature, index)}
+                  
                   <div className="grid grid-cols-1 lg:grid-cols-[1fr_200px] gap-6 items-center min-h-0">
                     {/* Left Content */}
                     <div className="relative z-10 min-h-0">
@@ -189,9 +326,13 @@ const Features = () => {
                             {feature.icon}
                           </div>
                         </div>
-                        <h3 className="text-2xl font-bold text-white group-hover:text-primary-400 transition-colors duration-300 leading-tight whitespace-pre-line">
-                          {feature.title}
-                        </h3>
+                        <div className="flex items-center flex-wrap gap-2">
+                          <h3 className="text-2xl font-bold text-white group-hover:text-primary-400 transition-colors duration-300 leading-tight whitespace-pre-line">
+                            {feature.title}
+                          </h3>
+                          {/* F-Category Badge for Draft 1 - inline with title */}
+                          {activeDraft === 1 && renderFCategoryBadge(feature, index)}
+                        </div>
                       </div>
 
                       {/* Description */}
@@ -331,6 +472,7 @@ const Features = () => {
             ))}
           </div>
         </div>
+        )}
       </div>
     </section>
   );

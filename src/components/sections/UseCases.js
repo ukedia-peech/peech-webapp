@@ -429,8 +429,8 @@ const UseCases = () => {
         </motion.div>
 
         {/* Tab Navigation */}
-        <div className="flex justify-center mb-12 px-4">
-          <div className="flex flex-nowrap gap-2 overflow-x-auto pb-2 scrollbar-hide">
+        <div className="flex justify-center mb-12 px-4 overflow-hidden">
+          <div className="flex flex-wrap justify-center gap-2 pb-2">
             {useCases.map((useCase, index) => (
               <motion.button
                 key={index}
