@@ -14,7 +14,7 @@ const HomePage = () => {
       transition={{ duration: 0.5 }}
     >
       <Hero />
-      <DatabaseDemo />
+      {/* <DatabaseDemo /> */}
       <Features />
       <CustomerLogos />
     </motion.div>

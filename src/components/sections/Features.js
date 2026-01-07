@@ -261,15 +261,12 @@ const Features = () => {
               as="h2"
               className="text-2xl sm:text-3xl md:text-5xl font-bold text-white"
             >
-              Powerful Features for{" "}
-              <GradientText gradient="from-primary-500 via-primary-400 to-primary-600">
-                Process Excellence
-              </GradientText>
+              The Peech F<sup className="text-orange-500 align-middle">4</sup> Formula - Find. Frame. Fix. Flow.
             </TiltedText>
           </div>
           
           {/* Draft Selector Buttons - Vertical on Right */}
-          <div className="fixed right-8 top-1/3 flex flex-col gap-2 z-50">
+          <div className="fixed right-8 top-1/3 flex flex-col gap-2 z-50" style={{display: 'none'}}>
             {[
               { value: 5, label: 'A' },
               { value: 7, label: 'B' },
@@ -291,199 +288,14 @@ const Features = () => {
             ))}
           </div>
           <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto px-4">
-            Everything you need to transform your business processes with
-            Celonis and comprehensive process mining solutions.
+            Transform your business processes with our comprehensive process mining consulting. From Celonis implementation to task mining - we deliver complete business transformation.
           </p>
         </motion.div>
 
         {/* Features Cards with Creative Layout */}
-        {activeDraft === 16 ? (
-          <div className="max-w-7xl mx-auto px-4 overflow-x-auto">
-            <FeaturesRadialLayout features={features} />
-          </div>
-        ) : activeDraft === 17 ? (
-          <div className="max-w-7xl mx-auto px-4">
-            <FeaturesRadialLayoutV2 features={features} />
-          </div>
-        ) : (
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{
-                  duration: 0.6,
-                  delay: index * 0.15,
-                  ease: [0.25, 0.46, 0.45, 0.94],
-                }}
-                className="group relative"
-              >
-                <div className={`relative bg-black-900/80 backdrop-blur-sm rounded-3xl p-8 border border-gray-800 hover:border-primary-500/50 transition-all duration-500 overflow-hidden h-full ${activeDraft === 4 ? 'pb-14' : ''}`}>
-                  {/* F-Category Badge for Drafts 2, 3, 4 */}
-                  {activeDraft !== 1 && renderFCategoryBadge(feature, index)}
-                  
-                  <div className="grid grid-cols-1 lg:grid-cols-[1fr_200px] gap-6 items-center min-h-0">
-                    {/* Left Content */}
-                    <div className="relative z-10 min-h-0">
-                      {/* Title with Icon */}
-                      <div className="flex items-start gap-4 mb-6">
-                        <div
-                          className={`w-14 h-14 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg flex-shrink-0 mt-1`}
-                        >
-                          <div className="w-8 h-8">
-                            {feature.icon}
-                          </div>
-                        </div>
-                        <div className="flex items-center flex-wrap gap-2">
-                          <h3 className="text-2xl font-bold text-white group-hover:text-primary-400 transition-colors duration-300 leading-tight whitespace-pre-line">
-                            {feature.title}
-                          </h3>
-                          {/* F-Category Badge for Draft 1 - inline with title */}
-                          {activeDraft === 1 && renderFCategoryBadge(feature, index)}
-                        </div>
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-gray-300 leading-relaxed">
-                        {feature.description}
-                      </p>
-                    </div>
-
-                    {/* Right Visual - Animated Abstract Design */}
-                    <div className="relative h-48 lg:h-full min-h-[180px] rounded-2xl overflow-hidden flex-shrink-0">
-                      {/* Animated background */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-black-800 to-black-900">
-                        {/* Grid pattern */}
-                        <div
-                          className="absolute inset-0 opacity-20"
-                          style={{
-                            backgroundImage:
-                              "linear-gradient(rgba(249, 115, 22, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(249, 115, 22, 0.3) 1px, transparent 1px)",
-                            backgroundSize: "20px 20px",
-                          }}
-                        />
-
-                        {/* Floating animated shapes - standardized sizes */}
-                        <motion.div
-                          animate={{
-                            y: [0, -12, 0],
-                            rotate: [0, 8, 0],
-                          }}
-                          transition={{
-                            duration: 3,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                          }}
-                          className={`absolute top-6 right-6 w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} opacity-40 blur-sm`}
-                        />
-                        <motion.div
-                          animate={{
-                            y: [0, 12, 0],
-                            rotate: [0, -8, 0],
-                            scale: [1, 1.05, 1],
-                          }}
-                          transition={{
-                            duration: 4,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: 0.5,
-                          }}
-                          className={`absolute bottom-6 left-6 w-16 h-16 rounded-full bg-gradient-to-br ${feature.color} opacity-30 blur-md`}
-                        />
-                        <motion.div
-                          animate={{
-                            scale: [1, 1.1, 1],
-                            rotate: [0, 10, 0],
-                          }}
-                          transition={{
-                            duration: 5,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                          }}
-                          className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-2xl bg-gradient-to-br ${feature.color} opacity-20`}
-                        />
-                      </div>
-
-                      {/* Central icon with enhanced glow */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <motion.div
-                          initial={{ scale: 0.8, opacity: 0 }}
-                          whileInView={{ scale: 1, opacity: 1 }}
-                          viewport={{ once: true }}
-                          transition={{
-                            duration: 0.6,
-                            delay: 0.2 + index * 0.1,
-                          }}
-                          whileHover={{ scale: 1.1, rotate: 5 }}
-                          className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center shadow-2xl relative group-hover:shadow-primary-500/50 transition-all duration-500`}
-                        >
-                          <div
-                            className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${feature.color} blur-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-500`}
-                          />
-                          <div className="relative text-white scale-125 group-hover:scale-150 transition-transform duration-500">
-                            {feature.icon}
-                          </div>
-                        </motion.div>
-                      </div>
-
-                      {/* Corner accents */}
-                      <div
-                        className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl ${feature.color} opacity-30 rounded-bl-full`}
-                      />
-                      <div
-                        className={`absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr ${feature.color} opacity-30 rounded-tr-full`}
-                      />
-
-                      {/* Particle effects */}
-                      <motion.div
-                        animate={{
-                          opacity: [0.3, 0.6, 0.3],
-                          scale: [0.8, 1, 0.8],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        }}
-                        className={`absolute top-4 left-4 w-2 h-2 rounded-full bg-gradient-to-br ${feature.color}`}
-                      />
-                      <motion.div
-                        animate={{
-                          opacity: [0.3, 0.6, 0.3],
-                          scale: [0.8, 1, 0.8],
-                        }}
-                        transition={{
-                          duration: 2.5,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: 0.5,
-                        }}
-                        className={`absolute bottom-8 right-8 w-2 h-2 rounded-full bg-gradient-to-br ${feature.color}`}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Hover glow effect */}
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-5 rounded-3xl transition-opacity duration-500 pointer-events-none`}
-                  />
-
-                  {/* Border glow on hover */}
-                  <div
-                    className={`absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}
-                    style={{
-                      boxShadow: `inset 0 0 30px rgba(249, 115, 22, 0.1)`,
-                    }}
-                  />
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <FeaturesRadialLayoutV2 features={features} />
         </div>
-        )}
       </div>
     </section>
   );
