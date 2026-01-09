@@ -49,11 +49,11 @@ const Careers = () => {
       department: "Project Management",
       location: "Hyderabad, India",
       type: "Full-time",
-      experience: "2-4 years",
+      experience: "8+ years",
       description:
         "Manage process mining projects, coordinate with consultants and clients, ensure timely delivery and client satisfaction.",
       requirements: [
-        "2-4 years of project management experience, preferably in consulting or technology",
+        "8+ years of project management experience, preferably in consulting or technology",
         "Strong organizational and communication skills",
         "Experience with Agile or Waterfall project management methodologies",
         "Familiarity with process mining or business transformation is a plus",
@@ -439,7 +439,7 @@ const Careers = () => {
                     </div>
 
                     {/* Apply Button */}
-                    <motion.a
+                    {/* <motion.a
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       href={selectedJob.applyLink}
@@ -448,7 +448,7 @@ const Careers = () => {
                       className="w-full btn-primary text-center block"
                     >
                       Apply for this Position
-                    </motion.a>
+                    </motion.a> */}
 
                     {/* Contact Info */}
                     <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
@@ -460,10 +460,10 @@ const Careers = () => {
                         team.
                       </p>
                       <a
-                        href="mailto:info@peech.tech"
+                        href="mailto:recruiting@peech.tech"
                         className="text-primary-500 hover:text-primary-400 transition-colors text-sm font-medium"
                       >
-                        info@peech.tech
+                        recruiting@peech.tech
                       </a>
                     </div>
                   </div>

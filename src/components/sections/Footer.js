@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { getPublicAssetPath } from "../../utils/utils";
+import emailjs from '@emailjs/browser';
 
 const Footer = ({ hideContactForm = false }) => {
   const [formData, setFormData] = useState({
@@ -12,15 +13,48 @@ const Footer = ({ hideContactForm = false }) => {
     message: ''
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    setFormData({ firstName: '', lastName: '', email: '', company: '', subject: '', message: '' });
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const templateParams = {
+        from_name: formData.firstName,
+        last_name: formData.lastName,
+        from_email: formData.email,
+        company: formData.company || 'Not provided',
+        subject: formData.subject,
+        message: formData.message,
+      };
+
+      await emailjs.send(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        templateParams,
+        process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+      );
+
+      setSubmitStatus('success');
+      setFormData({ firstName: '', lastName: '', email: '', company: '', subject: '', message: '' });
+      
+      setTimeout(() => setSubmitStatus(null), 5000);
+    } catch (error) {
+      console.error('Email sending failed:', error);
+      setSubmitStatus('error');
+      
+      setTimeout(() => setSubmitStatus(null), 5000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -215,13 +249,46 @@ const Footer = ({ hideContactForm = false }) => {
                     className="w-full px-3 py-2 bg-black-900 border border-gray-700 rounded-lg text-white text-sm placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary-500 transition-all resize-none"
                     placeholder="Message *"
                   />
+                  {submitStatus === 'success' && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-3 bg-green-500/10 border border-green-500/30 rounded-lg text-green-400 text-sm text-center"
+                    >
+                      ✓ Message sent successfully! We'll get back to you soon.
+                    </motion.div>
+                  )}
+                  
+                  {submitStatus === 'error' && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm text-center"
+                    >
+                      ✗ Failed to send message. Please try again or email us directly.
+                    </motion.div>
+                  )}
+                  
                   <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                    whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                     type="submit"
-                    className="w-full py-2.5 bg-gradient-to-r from-primary-500 to-orange-500 text-white text-sm font-semibold rounded-lg shadow-lg shadow-primary-500/20 hover:shadow-primary-500/30 transition-all"
+                    disabled={isSubmitting}
+                    className={`w-full py-2.5 bg-gradient-to-r from-primary-500 to-orange-500 text-white text-sm font-semibold rounded-lg shadow-lg shadow-primary-500/20 hover:shadow-primary-500/30 transition-all ${
+                      isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
+                    }`}
                   >
-                    Send Message
+                    {isSubmitting ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                        </svg>
+                        Sending...
+                      </span>
+                    ) : (
+                      'Send Message'
+                    )}
                   </motion.button>
                 </form>
               </div>
@@ -238,20 +305,20 @@ const Footer = ({ hideContactForm = false }) => {
           >
             <div className="relative group w-full">
               {/* Glow effect behind logo */}
-              <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-teal-500/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
               {/* Partner badge container */}
-              <div className="relative h-full bg-gradient-to-br from-black-800/50 to-black-900/50 backdrop-blur-sm border border-yellow-500/20 rounded-2xl p-6 shadow-2xl hover:border-yellow-500/40 transition-all duration-500 flex flex-col items-center justify-center">
+              <div className="relative h-full bg-gradient-to-br from-black-800/50 to-black-900/50 backdrop-blur-sm border border-cyan-500/20 rounded-2xl p-6 shadow-2xl hover:border-cyan-500/40 transition-all duration-500 flex flex-col items-center justify-center">
                 <div className="text-center mb-4">
-                  <span className="inline-block px-3 py-1 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/30 rounded-full text-yellow-500 text-xs font-semibold uppercase tracking-wider">
+                  <span className="inline-block px-3 py-1 bg-gradient-to-r from-cyan-500/20 to-teal-500/20 border border-cyan-500/30 rounded-full text-cyan-400 text-xs font-semibold uppercase tracking-wider">
                     Certified Partner
                   </span>
                 </div>
 
                 <img
-                  src={getPublicAssetPath("Celonis-Gold.png")}
-                  alt="Celonis Gold Partner"
-                  className="h-28 sm:h-32 md:h-40 w-auto object-contain mx-auto filter drop-shadow-2xl"
+                  src={getPublicAssetPath("peechXCelonis-platinum-partner.png")}
+                  alt="Celonis Platinum Partner"
+                  className="h-32 sm:h-36 md:h-48 w-auto object-contain mx-auto filter drop-shadow-2xl"
                   onError={(e) => {
                     e.target.style.display = "none";
                   }}
