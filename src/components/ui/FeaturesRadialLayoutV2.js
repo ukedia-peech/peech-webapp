@@ -60,7 +60,7 @@ const FeaturesRadialLayoutV2 = ({ features }) => {
       return { x, y, angle: baseAngle };
     } else {
       // Frame (right, 0°) and Flow (left, 180°) - use original angle-based spreading
-      const spreadAngle = 45; // Slightly increased angle for better spacing
+      const spreadAngle = 40; // Reduced angle to bring cards closer vertically
       const offset = totalCards > 1 ? (cardIndex - (totalCards - 1) / 2) * spreadAngle : 0;
       const angle = baseAngle + offset;
       const x = Math.cos((angle * Math.PI) / 180) * radius;
