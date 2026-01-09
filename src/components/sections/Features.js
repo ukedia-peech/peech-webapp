@@ -266,7 +266,7 @@ const Features = () => {
           </div>
           
           {/* Draft Selector Buttons - Vertical on Right */}
-          <div className="fixed right-8 top-1/3 flex flex-col gap-2 z-50" style={{display: 'none'}}>
+          {/* <div className="fixed right-8 top-1/3 flex flex-col gap-2 z-50">
             {[
               { value: 5, label: 'A' },
               { value: 7, label: 'B' },
@@ -286,7 +286,7 @@ const Features = () => {
                 {draft.label}
               </button>
             ))}
-          </div>
+          </div> */}
           <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto px-4">
             Transform your business processes with our comprehensive process mining consulting. From Celonis implementation to task mining - we deliver complete business transformation.
           </p>
@@ -296,6 +296,7 @@ const Features = () => {
         <div className="max-w-7xl mx-auto px-4">
           <FeaturesRadialLayoutV2 features={features} />
         </div>
+        {/* Commented out A, B, C, D options - grid layout (saved for future reference) */}
       </div>
     </section>
   );

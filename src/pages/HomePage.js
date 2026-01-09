@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Hero from "../components/sections/Hero";
-import DatabaseDemo from "../components/sections/DatabaseDemo";
+// import DatabaseDemo from "../components/sections/DatabaseDemo";
 import Features from "../components/sections/Features";
 import CustomerLogos from "../components/sections/CustomerLogos";
 
