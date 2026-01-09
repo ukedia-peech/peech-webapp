@@ -57,7 +57,7 @@ const AppContent = ({ isLoading, handleLoadingComplete }) => {
                 </Routes>
               </Suspense>
             </main>
-            <Footer hideContactForm={isContactPage} />
+            <Footer hideContactForm={false} />
           </motion.div>
         )}
       </AnimatePresence>
