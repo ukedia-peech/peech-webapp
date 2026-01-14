@@ -6,6 +6,7 @@ import { TiltedText, GradientText } from "../ui/AnimatedText";
 import FeaturesFlowLayout from "../ui/FeaturesFlowLayout";
 import FeaturesRadialLayout from "../ui/FeaturesRadialLayout";
 import FeaturesRadialLayoutV2 from "../ui/FeaturesRadialLayoutV2";
+import FeaturesVerticalMobile from "../ui/FeaturesVerticalMobile";
 
 const Features = () => {
   const [activeDraft, setActiveDraft] = useState(5);
@@ -293,8 +294,16 @@ const Features = () => {
         </motion.div>
 
         {/* Features Cards with Creative Layout */}
-        <div className="max-w-7xl mx-auto px-4">
-          <FeaturesRadialLayoutV2 features={features} />
+        <div className="max-w-7xl mx-auto">
+          {/* Desktop/Tablet: Radial Layout */}
+          <div className="hidden md:block px-4">
+            <FeaturesRadialLayoutV2 features={features} />
+          </div>
+          
+          {/* Mobile: Vertical Animation */}
+          <div className="block md:hidden">
+            <FeaturesVerticalMobile features={features} />
+          </div>
         </div>
         {/* Commented out A, B, C, D options - grid layout (saved for future reference) */}
       </div>
